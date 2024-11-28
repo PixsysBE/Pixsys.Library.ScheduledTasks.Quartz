@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Pixsys.Library.ScheduledTasks.Quartz</id>
+    <title>Pixsys.Library.ScheduledTasks.Quartz</title>
+    <description>A set of helpers to create one time job and recurrent jobs using Quartz Scheduler</description>
+    <authors>Sylvain Signore</authors>
+    <version>0.0.0.0</version>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/PixsysBE/Pixsys.Library.ScheduledTasks.Quartz</projectUrl>
+    <dependencies>
+    <group targetFramework="net8.0">
+      <dependency id="Quartz.Extensions.DependencyInjection" version="3.13.1" />
+      <dependency id="Quartz.Extensions.Hosting" version="3.13.1" />
+    </group>
+    </dependencies>      
+  </metadata>
+  <files>
+    <file src="bin\Release\**\*.dll" target="lib" />
+    <file src="bin\Release\**\*.xml" target="lib" />
+    <file src="..\..\..\README.md" target="README.md" />
+  </files>
+</package>
