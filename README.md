@@ -21,7 +21,7 @@ public static async Task Main(string[] args)
 ...
     var app = builder.Build();
 
-    await app.ScheduleRecurringJobsAsync(Assembly.GetExecutingAssembly());
+    await app.ScheduleRecurringJobsAsync(typeof(Program).Assembly);
 }
 ```
 

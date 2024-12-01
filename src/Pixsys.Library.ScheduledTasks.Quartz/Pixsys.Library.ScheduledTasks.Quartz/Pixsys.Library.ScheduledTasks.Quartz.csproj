@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <IsPackable>true</IsPackable>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Deterministic>False</Deterministic>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -16,6 +19,12 @@
     <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.13.1" />
     <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.1" />
   </ItemGroup>
+  <Target Name="CopyCakeReleaseGitHooks" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <_CustomFiles Include=".\..\.build\CakeRelease\Git\Hooks\commit-msg" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_CustomFiles)" DestinationFolder=".\..\..\..\.git\hooks" />
+  </Target>
   <ItemGroup>
     <AdditionalFiles Include="C:\Users\Sylvain\.nuget\packages\pixsys.library.stylecopanalyzers\1.2.0\stylecop.json" Link="stylecop.json" />
   </ItemGroup>

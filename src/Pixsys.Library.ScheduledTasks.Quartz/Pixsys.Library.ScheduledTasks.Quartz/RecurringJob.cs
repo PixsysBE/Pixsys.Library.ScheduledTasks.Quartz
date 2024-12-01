@@ -50,7 +50,7 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
         protected abstract List<ITrigger> GetManualTriggers();
 
         /// <summary>
-        /// <para>CronMaker: <see href="http://www.cronmaker.com/"/>.</para>
+        /// <para>To create a valid cron expression: <see href="https://www.quartz-scheduler.net/documentation/quartz-3.x/how-tos/crontrigger.html#format"/>.</para>
         /// <para>Doc: <see href="https://www.quartz-scheduler.net/documentation/quartz-3.x/how-tos/crontrigger.html" />.</para>
         /// </summary>
         /// <remarks>
@@ -71,15 +71,16 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
             List<ITrigger> list = [];
             string configKey = $"ScheduledTasks:Quartz:{Key.Group}:{Key.Name}";
 
-            List<string>? cronSchedules = config.GetSection(configKey).Get<List<string>>();
+            List<string>? cronExpressions = config.GetSection(configKey).Get<List<string>>();
 
-            if (cronSchedules != null && cronSchedules.Count != 0)
+            if (cronExpressions != null && cronExpressions.Count != 0)
             {
-                foreach (string cronSchedule in cronSchedules)
+                foreach (string cronExpression in cronExpressions)
                 {
+                    CronExpression.ValidateExpression(cronExpression);
                     ITrigger trigger = TriggerBuilder.Create()
                                    .ForJob(Key)
-                                   .WithCronSchedule(cronSchedule)
+                                   .WithCronSchedule(cronExpression)
                                    .Build();
                     list.Add(trigger);
                 }

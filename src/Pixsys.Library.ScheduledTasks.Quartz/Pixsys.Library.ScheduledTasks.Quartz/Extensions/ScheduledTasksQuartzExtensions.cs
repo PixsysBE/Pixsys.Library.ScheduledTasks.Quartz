@@ -36,7 +36,7 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
 
         /// <summary>
         /// Schedules the recurring jobs.
-        /// <para>CronMaker: <see href="http://www.cronmaker.com/"/>.</para>
+        /// <para>To create a valid cron expression: <see href="https://www.quartz-scheduler.net/documentation/quartz-3.x/how-tos/crontrigger.html#format"/>.</para>
         /// <para>Doc: <see href="https://www.quartz-scheduler.net/documentation/quartz-3.x/how-tos/crontrigger.html" />.</para>
         /// </summary>
         /// <remarks>
