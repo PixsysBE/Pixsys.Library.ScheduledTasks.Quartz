@@ -17,7 +17,6 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
     /// <param name="logger">The logger.</param>
     /// <param name="schedulerFactory">The scheduling factory.</param>
     /// <seealso cref="BaseJob" />
-    [DisallowConcurrentExecution]
     public abstract class OneTimeJob(ILogger<BaseJob> logger, ISchedulerFactory schedulerFactory) : BaseJob(logger, schedulerFactory)
     {
         /// <summary>
