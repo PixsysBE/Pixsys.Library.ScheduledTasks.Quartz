@@ -79,6 +79,7 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
                 {
                     CronExpression.ValidateExpression(cronExpression);
                     ITrigger trigger = TriggerBuilder.Create()
+                                   .WithIdentity($"{Key.Name}_{Guid.NewGuid()}")
                                    .ForJob(Key)
                                    .WithCronSchedule(cronExpression)
                                    .Build();

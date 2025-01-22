@@ -26,8 +26,9 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task StartNowAsync(JobDataMap? data = null)
         {
-            TriggerBuilder trigger = TriggerBuilder.Create();
-            trigger = trigger.ForJob(Key);
+            TriggerBuilder trigger = TriggerBuilder.Create()
+                                    .ForJob(Key)
+                                    .WithIdentity($"{Key.Name}_{Guid.NewGuid()}");
             if (data != null)
             {
                 trigger = trigger.UsingJobData(data);
