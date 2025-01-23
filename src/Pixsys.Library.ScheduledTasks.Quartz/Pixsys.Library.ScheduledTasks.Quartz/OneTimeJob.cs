@@ -26,9 +26,11 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task StartNowAsync(JobDataMap? data = null)
         {
+            IJobDetail jb = JobDetail ?? Build();
+            JobKey key = jb.Key;
             TriggerBuilder trigger = TriggerBuilder.Create()
-                                    .ForJob(Key)
-                                    .WithIdentity($"{Key.Name}_{Guid.NewGuid()}");
+                                    .ForJob(key)
+                                    .WithIdentity($"{key.Name}_{Guid.NewGuid()}");
             if (data != null)
             {
                 trigger = trigger.UsingJobData(data);
@@ -38,10 +40,10 @@ namespace Pixsys.Library.ScheduledTasks.Quartz
             IScheduler scheduler = await GetSchedulerAsync();
             foreach (IJobListener listener in GetJobListeners())
             {
-                scheduler.ListenerManager.AddJobListener(listener, KeyMatcher<JobKey>.KeyEquals(Key));
+                scheduler.ListenerManager.AddJobListener(listener, KeyMatcher<JobKey>.KeyEquals(key));
             }
 
-            _ = await scheduler.ScheduleJob(Build(), trigger.Build());
+            _ = await scheduler.ScheduleJob(jb, trigger.Build());
         }
 
         /// <summary>

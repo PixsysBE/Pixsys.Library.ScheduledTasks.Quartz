@@ -37,6 +37,14 @@ namespace Pixsys.Library.ScheduledTasks.Quartz.Base
         }
 
         /// <summary>
+        /// Gets or sets the job detail.
+        /// </summary>
+        /// <value>
+        /// The job detail.
+        /// </value>
+        public IJobDetail? JobDetail { get; set; }
+
+        /// <summary>
         /// Gets the key.
         /// </summary>
         /// <value>
@@ -86,7 +94,8 @@ namespace Pixsys.Library.ScheduledTasks.Quartz.Base
                 job = job.UsingJobData(data);
             }
 
-            return job.Build();
+            JobDetail = job.Build();
+            return JobDetail;
         }
 
         /// <summary>
